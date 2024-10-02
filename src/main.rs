@@ -48,6 +48,11 @@ async fn process_tweets() -> Result<()> {
         // check if key exists
         if tweets_bucket.get(&id)?.is_none() {
             tracing::info!("Tweet {} not replied to, replying", id);
+            let delay = random_t();
+
+            tracing::info!("Delaying for {} seconds", delay);
+            tokio::time::sleep(tokio::time::Duration::from_secs(delay.into())).await;
+
             let res = tweet(id.clone()).await;
             if res.is_ok() {
                 tweets_bucket.set(&id, &"true".to_string())?;
