@@ -1,0 +1,8 @@
+/target
+*.env
+**/accounts.txt
+**/accounts.db*
+**/tweetdb/
+Dockerfile
+docker-compose.yml
+/data

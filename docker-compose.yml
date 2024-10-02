@@ -1,0 +1,11 @@
+services:
+  pipedown:
+    network_mode: host
+    image: pipedown
+    build: .
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./data:/data
+    env_file:
+      - .env
