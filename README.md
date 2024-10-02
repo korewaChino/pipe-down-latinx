@@ -11,3 +11,7 @@ A "simple" Twitter bot that tells @hayasaka_aryan to pipe down. Bro's not even a
 3. Run `cargo run --release` to start the bot.
 
 I recommend running a cron job to run the bot every hour or so.
+
+## Docker setup
+
+Set up twscrape like above, set environment variables in `docker-compose.yml` and run `docker-compose up -d`.
