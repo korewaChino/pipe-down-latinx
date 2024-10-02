@@ -1,6 +1,6 @@
 # Pipe down, Latinx
 
-AS SEEN ON TWITTER: [@PipeDownLatinx](https://twitter.com/PipeDownLatinx)
+AS SEEN ON TWITTER: [@PipeDownHaya](https://twitter.com/PipeDownHaya)
 
 A "simple" Twitter bot that tells @hayasaka_aryan to pipe down. Bro's not even a real Aryan, smh.
 
