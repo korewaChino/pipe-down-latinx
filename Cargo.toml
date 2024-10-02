@@ -9,6 +9,7 @@ color-eyre = "0.6.3"
 cronjob = "0.4.17"
 dotenvy = "0.15.7"
 kv = "0.24.0"
+rand = "0.8.5"
 reqwest = { version = "0.12.7", default-features = false, features = ["rustls-tls", "json"] }
 serde = { version = "1.0.210", features = ["derive"] }
 serde_json = "1.0.128"

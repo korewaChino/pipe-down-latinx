@@ -61,6 +61,13 @@ async fn process_tweets() -> Result<()> {
     Ok(())
 }
 
+// generate random number between 0 and 59
+fn random_t() -> u32 {
+    use rand::Rng;
+    let mut rng = rand::thread_rng();
+    rng.gen_range(0..59)
+}
+
 #[tokio::main]
 async fn main() -> Result<()> {
     dotenvy::dotenv().ok();
@@ -83,8 +90,8 @@ async fn main() -> Result<()> {
         });
     });
 
-    cron.minutes("0");
-    cron.seconds("0");
+    cron.minutes(&random_t().to_string());
+    cron.seconds(&random_t().to_string());
     cron.start_job();
 
     Ok(())
