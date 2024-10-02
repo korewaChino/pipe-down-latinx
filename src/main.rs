@@ -37,7 +37,18 @@ fn store() -> Result<Store> {
 }
 
 async fn process_tweets() -> Result<()> {
-    let ids = scrape::get_twitter_ids(scrape::scrape_tweets()?);
+    // let ids = scrape::get_twitter_ids(scrape::scrape_tweets()?);
+    // delay and retry if failed
+    let ids = loop {
+        match scrape::scrape_tweets() {
+            Ok(tweets) => break scrape::get_twitter_ids(tweets),
+            Err(e) => {
+                tracing::error!(?e);
+                tracing::info!("Retrying in 60 seconds");
+                tokio::time::sleep(tokio::time::Duration::from_secs(60)).await;
+            }
+        }
+    };
 
     tracing::info!(?ids);
     let store = store()?;
@@ -86,11 +97,11 @@ async fn main() -> Result<()> {
 
     let args = PipeDown::parse();
     args.set_envar_from_args();
-    let _ = process_tweets().await;
+    // let _ = process_tweets().await;
     // let _ = tweet("1841274170685935834".into()).await;
 
     let mut cron = cronjob::CronJob::new("test", |_: &str| {
-        tokio::spawn(async {
+        tokio::task::spawn_blocking(|| async {
             let _ = process_tweets().await;
         });
     });
