@@ -83,7 +83,8 @@ async fn main() -> Result<()> {
         });
     });
 
-    cron.minutes("30");
+    cron.minutes("0");
+    cron.seconds("0");
     cron.start_job();
 
     Ok(())
