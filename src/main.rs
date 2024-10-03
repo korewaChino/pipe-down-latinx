@@ -97,17 +97,22 @@ async fn main() -> Result<()> {
 
     let args = PipeDown::parse();
     args.set_envar_from_args();
-    // let _ = process_tweets().await;
     // let _ = tweet("1841274170685935834".into()).await;
-
-    let mut cron = cronjob::CronJob::new("test", |_: &str| {
+    
+    let mut cron = cronjob::CronJob::new("tweet", |_: &str| {
         tokio::task::spawn_blocking(|| async {
             let _ = process_tweets().await;
         });
     });
+    
+    // let minutes = random_t();
+    // tracing::info!("Random minutes: {}", minutes);
+    // let seconds = random_t();
+    // tracing::info!("Random seconds: {}", seconds);
+    cron.minutes("0");
+    cron.seconds("30");
 
-    cron.minutes(&random_t().to_string());
-    cron.seconds(&random_t().to_string());
+    let _ = process_tweets().await;
     cron.start_job();
 
     Ok(())
