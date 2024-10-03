@@ -100,7 +100,7 @@ async fn main() -> Result<()> {
     // let _ = tweet("1841274170685935834".into()).await;
     
     let mut cron = cronjob::CronJob::new("tweet", |_: &str| {
-        tokio::task::spawn_blocking(|| async {
+        tokio::spawn(async {
             let _ = process_tweets().await;
         });
     });
