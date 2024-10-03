@@ -109,7 +109,7 @@ async fn main() -> Result<()> {
     // tracing::info!("Random minutes: {}", minutes);
     // let seconds = random_t();
     // tracing::info!("Random seconds: {}", seconds);
-    cron.minutes("0");
+    cron.minutes("30");
     cron.seconds("30");
 
     let _ = process_tweets().await;
